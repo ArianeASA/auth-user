@@ -38,7 +38,7 @@ resource "aws_cloudwatch_log_group" "fiap_food_log_group" {
 }
 
 resource "aws_iam_role" "lambda_exec" {
-  name = "serverless_auth_user_lambda_roles"
+  name = "serverless_auth_user_xx_lambda_roles"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -54,7 +54,7 @@ resource "aws_iam_role" "lambda_exec" {
 }
 
 resource "aws_iam_policy" "function_logging_policy" {
-  name   = "auth-user-lambda-logging-policy"
+  name   = "auth-user-xx-lambda-logging-policy"
   policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
