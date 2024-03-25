@@ -49,9 +49,12 @@ components:
     User:
       type: object
       properties:
-        cpf:
+        username:
           type: string
           example: code identification
+        registration_number:
+          type: string
+          example: registration number
         name:
           type: string
           example: John
@@ -64,7 +67,7 @@ components:
     Auths:
       type: object
       properties:
-        cpf:
+        username:
           type: string
           example: code identification
         password:
