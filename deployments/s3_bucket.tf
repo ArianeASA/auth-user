@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "lambda_bucket" {
-  bucket = "auth-lambda-bucket-go"
+  bucket = "auth-user-lambda-bucket-go"
 }
 
 resource "aws_s3_bucket_ownership_controls" "lambda_bucket_controls" {
