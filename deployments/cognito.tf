@@ -9,6 +9,8 @@ resource "aws_cognito_user_pool" "cognito_user_pool" {
     default_email_option  = "CONFIRM_WITH_LINK"
   }
 
+  username_attributes = ["registration_number"]
+
   email_configuration {
     email_sending_account = "COGNITO_DEFAULT"
   }

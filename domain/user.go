@@ -12,7 +12,7 @@ type User struct {
 	Password           string
 }
 
-type CredentialsByUserName struct {
+type Credentials struct {
 	Password string
 	UserName string
 }
@@ -38,7 +38,7 @@ func (user *User) userFromDomain() User {
 	}
 }
 
-func (cred *CredentialsByUserName) credentialsFromDomain() dto.Credentials {
+func (cred *Credentials) credentialsFromDomain() dto.Credentials {
 	return dto.Credentials{
 		Password: cred.Password,
 		Username: cred.UserName,
@@ -63,10 +63,17 @@ func UserToDomain(user dto.User) User {
 	}
 }
 
-func CredentialsToDomain(cred dto.Credentials) CredentialsByUserName {
-	return CredentialsByUserName{
+func CredentialsToDomain(cred dto.Credentials, usernameType string) Credentials {
+	var username string
+	switch usernameType {
+	case TypeUsername:
+		username = cred.Username
+	case TypeRegistrationNumber:
+		username = cred.RegistrationNumber
+	}
+	return Credentials{
 		Password: cred.Password,
-		UserName: cred.Username,
+		UserName: username,
 	}
 }
 

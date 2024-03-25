@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func (use *usecases) HandleGetToken(credentials domain.CredentialsByUserName) (events.APIGatewayProxyResponse, error) {
+func (use *usecases) HandleGetToken(credentials domain.Credentials) (events.APIGatewayProxyResponse, error) {
 	token, err := use.auth.NewToken(credentials)
 	if err != nil {
 		return events.APIGatewayProxyResponse{
