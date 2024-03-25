@@ -22,7 +22,7 @@ resource "aws_lambda_function" "auth_user_lambda" {
 
 resource "aws_lambda_permission" "apigw_lambda_token" {
 
-  statement_id  = "inter-lambda"
+  statement_id  = "inter-auth-lambda"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.auth_user_lambda.function_name
   principal     = "apigateway.amazonaws.com"
