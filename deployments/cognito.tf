@@ -1,6 +1,6 @@
 
 resource "aws_cognito_user_pool" "cognito_user_pool" {
-  name = "auth-user-pool"
+  name = "auth-user-x-pool"
   auto_verified_attributes = ["email"]
   email_verification_message = "Bem-vindo ao nosso serviço User AUTH. Para verificar sua conta, clique no link abaixo.\n {####}"
   email_verification_subject = "Verifique sua conta USER AUTH"
