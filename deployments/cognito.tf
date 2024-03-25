@@ -23,12 +23,12 @@ resource "aws_cognito_user_pool" "cognito_user_pool" {
 
 }
 resource "aws_cognito_user_pool_domain" "user_pool_domain" {
-  domain      = "auth-user-domain"
+  domain      = "auth-user-x-domain"
   user_pool_id = aws_cognito_user_pool.cognito_user_pool.id
 }
 
 resource "aws_cognito_user_pool_client" "cognito_user_pool_client" {
-  name         = "auth-user-pool-client"
+  name         = "auth-user-x-pool-client"
   user_pool_id = aws_cognito_user_pool.cognito_user_pool.id
 
   explicit_auth_flows = ["ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_PASSWORD_AUTH",

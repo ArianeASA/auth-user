@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "auth_user_lambda" {
-  function_name = "auth-user-lambda"
+  function_name = "auth-user-xx-lambda"
 
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.lambda_main.key
