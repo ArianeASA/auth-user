@@ -1,4 +1,3 @@
-
 resource "aws_cognito_user_pool" "cognito_user_pool" {
   name = "auth-user-x-pool"
   auto_verified_attributes = ["email"]
@@ -11,9 +10,14 @@ resource "aws_cognito_user_pool" "cognito_user_pool" {
 
 
   schema {
-    name                = "registration_number"
     attribute_data_type = "String"
-    mutable             = false
+    mutable = true
+    name = "registration_number"
+    required = false
+    string_attribute_constraints {
+      min_length = 1
+      max_length = 128
+    }
   }
 
   email_configuration {
