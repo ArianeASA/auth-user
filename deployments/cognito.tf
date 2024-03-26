@@ -9,7 +9,6 @@ resource "aws_cognito_user_pool" "cognito_user_pool" {
     default_email_option  = "CONFIRM_WITH_LINK"
   }
 
-  username_attributes = ["phone_number"]
 
   schema {
     name                = "registration_number"
