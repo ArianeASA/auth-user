@@ -1,4 +1,3 @@
-
 resource "aws_cognito_user_pool" "cognito_user_pool" {
   name = "auth-user-x-pool"
   auto_verified_attributes = ["email"]
@@ -7,6 +6,18 @@ resource "aws_cognito_user_pool" "cognito_user_pool" {
 
   verification_message_template {
     default_email_option  = "CONFIRM_WITH_LINK"
+  }
+
+
+  schema {
+    attribute_data_type = "String"
+    mutable = true
+    name = "registration_number"
+    required = false
+    string_attribute_constraints {
+      min_length = 1
+      max_length = 128
+    }
   }
 
   email_configuration {
@@ -30,6 +41,9 @@ resource "aws_cognito_user_pool_domain" "user_pool_domain" {
 resource "aws_cognito_user_pool_client" "cognito_user_pool_client" {
   name         = "auth-user-x-pool-client"
   user_pool_id = aws_cognito_user_pool.cognito_user_pool.id
+
+  read_attributes  = ["email", "custom:registration_number"]
+  write_attributes = ["email", "custom:registration_number"]
 
   explicit_auth_flows = ["ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_PASSWORD_AUTH",
     "ALLOW_USER_SRP_AUTH"]

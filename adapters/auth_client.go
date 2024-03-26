@@ -34,6 +34,9 @@ func (auth *authExternalClient) NewUser(user domain.User) error {
 			}, {
 				Name:  aws.String("name"),
 				Value: aws.String(user.Name),
+			}, {
+				Name:  aws.String("custom:registration_number"),
+				Value: aws.String(user.RegistrationNumber),
 			},
 		},
 	}
@@ -49,7 +52,7 @@ func (auth *authExternalClient) NewUser(user domain.User) error {
 
 }
 
-func (auth *authExternalClient) NewToken(cred domain.CredentialsByUserName) (domain.AuthResult, error) {
+func (auth *authExternalClient) NewToken(cred domain.Credentials) (domain.AuthResult, error) {
 	input := &cognitoidentityprovider.InitiateAuthInput{
 		AuthFlow: aws.String("USER_PASSWORD_AUTH"),
 		AuthParameters: map[string]*string{
