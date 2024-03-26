@@ -1,5 +1,5 @@
 resource "aws_lambda_function" "auth_user_lambda" {
-  function_name = "auth-user-lambda"
+  function_name = "auth-user-xx-lambda"
 
   s3_bucket = aws_s3_bucket.lambda_bucket.id
   s3_key    = aws_s3_object.lambda_main.key
@@ -22,7 +22,7 @@ resource "aws_lambda_function" "auth_user_lambda" {
 
 resource "aws_lambda_permission" "apigw_lambda_token" {
 
-  statement_id  = "inter-lambda"
+  statement_id  = "inter-auth-lambda"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.auth_user_lambda.function_name
   principal     = "apigateway.amazonaws.com"
@@ -38,7 +38,7 @@ resource "aws_cloudwatch_log_group" "fiap_food_log_group" {
 }
 
 resource "aws_iam_role" "lambda_exec" {
-  name = "serverless_lambda_roles"
+  name = "serverless_auth_user_xx_lambda_roles"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -54,7 +54,7 @@ resource "aws_iam_role" "lambda_exec" {
 }
 
 resource "aws_iam_policy" "function_logging_policy" {
-  name   = "lambda-logging-policy"
+  name   = "auth-user-xx-lambda-logging-policy"
   policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [

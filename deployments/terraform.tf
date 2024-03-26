@@ -11,7 +11,7 @@ terraform {
 
   backend "s3" {
     bucket = "terraforms-bucket"
-    key    = "states-lambda"
+    key    = "states-auth-user-x-lambda"
     region = "us-east-2"
   }
 }

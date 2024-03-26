@@ -10,7 +10,7 @@ type usecases struct {
 }
 
 type Usecases interface {
-	HandleGetToken(credentials domain.CredentialsByUserName) (events.APIGatewayProxyResponse, error)
+	HandleGetToken(credentials domain.Credentials) (events.APIGatewayProxyResponse, error)
 	HandleCreateUser(user domain.User) (events.APIGatewayProxyResponse, error)
 }
 

@@ -32,12 +32,13 @@ func Router(req events.APIGatewayV2HTTPRequest) (events.APIGatewayProxyResponse,
 	}
 
 	if strings.HasSuffix(httpRequest.Path, "/users/token") && httpRequest.Method == "POST" {
+		var usernameType = req.Headers["x-auth-user-type"]
 		var credential dto.Credentials
 		proxyResponse := getObject[dto.Credentials](req, &credential)
 		if proxyResponse.StatusCode != 0 {
 			return proxyResponse, nil
 		}
-		return cases.HandleGetToken(domain.CredentialsToDomain(credential))
+		return cases.HandleGetToken(domain.CredentialsToDomain(credential, usernameType))
 	}
 
 	log.Println(fmt.Sprintf("endpoint não encontrado %s", httpRequest.Path))
