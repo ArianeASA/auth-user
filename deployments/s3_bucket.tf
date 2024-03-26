@@ -2,6 +2,15 @@ resource "aws_s3_bucket" "lambda_bucket" {
   bucket = "auth-user-x-lambda-bucket-go"
 }
 
+resource "aws_s3_bucket_public_access_block" "auth-public-access-block" {
+  bucket = aws_s3_bucket.lambda_bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 resource "aws_s3_bucket_ownership_controls" "lambda_bucket_controls" {
   bucket = aws_s3_bucket.lambda_bucket.id
   rule {
@@ -54,7 +63,21 @@ resource "aws_iam_policy" "s3_get_object" {
         Resource = [
           "arn:aws:s3:::${aws_s3_bucket.lambda_bucket.id}/${aws_s3_object.lambda_main.key}"
         ]
-      }
+      },{
+        Sid       = "HTTPSOnly"
+        Effect    = "Deny"
+        Principal = "*"
+        Action    = "s3:*"
+        Resource = [
+          aws_s3_bucket.lambda_bucket.arn,
+          "${aws_s3_bucket.lambda_bucket.arn}/*",
+        ]
+        Condition = {
+          Bool = {
+            "aws:SecureTransport" = "false"
+          }
+        }
+      },
     ]
   })
 }
