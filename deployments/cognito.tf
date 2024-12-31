@@ -42,8 +42,8 @@ resource "aws_cognito_user_pool_client" "cognito_user_pool_client" {
   name         = "auth-user-x-pool-client"
   user_pool_id = aws_cognito_user_pool.cognito_user_pool.id
 
-  read_attributes  = ["email", "custom:registration_number", "username", "password"]
-  write_attributes = ["email", "custom:registration_number", "username", "password"]
+  read_attributes  = ["email", "custom:registration_number", "name"]
+  write_attributes = ["email", "custom:registration_number", "name"]
 
   explicit_auth_flows = ["ALLOW_REFRESH_TOKEN_AUTH", "ALLOW_USER_PASSWORD_AUTH",
     "ALLOW_USER_SRP_AUTH"]
