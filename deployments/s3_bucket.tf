@@ -66,7 +66,6 @@ resource "aws_iam_policy" "s3_get_object" {
       },{
         Sid       = "HTTPSOnly"
         Effect    = "Deny"
-        Principal = "*"
         Action    = "s3:*"
         Resource = [
           aws_s3_bucket.lambda_bucket.arn,
