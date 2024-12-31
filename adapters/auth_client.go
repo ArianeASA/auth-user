@@ -35,11 +35,10 @@ func (auth *authExternalClient) NewUser(user domain.User) error {
 				Name:  aws.String("name"),
 				Value: aws.String(user.Name),
 			},
-			//
-			//{
-			//	Name:  aws.String("custom:registration_number"),
-			//	Value: aws.String(user.RegistrationNumber),
-			//},
+			{
+				Name:  aws.String("custom:registration_number"),
+				Value: aws.String(user.RegistrationNumber),
+			},
 		},
 	}
 
