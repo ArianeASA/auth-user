@@ -53,11 +53,21 @@ resource "aws_iam_role" "lambda_exec" {
   })
 }
 
-resource "aws_iam_policy" "function_logging_policy" {
-  name   = "auth-user-xx-lambda-logging-policy"
+resource "aws_iam_policy" "function_all_policy" {
+  name   = "auth-user-xx-lambda-all-policy"
   policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "cognito-idp:AdminCreateUser",
+          "cognito-idp:AdminGetUser",
+          "cognito-idp:ListUsers",
+          "cognito-idp:ListUserPools"
+        ],
+        "Resource": "*"
+      },
       {
         Action : [
           "logs:CreateLogGroup",
@@ -73,7 +83,7 @@ resource "aws_iam_policy" "function_logging_policy" {
 
 resource "aws_iam_role_policy_attachment" "lambda_policy" {
   role       = aws_iam_role.lambda_exec.name
-  policy_arn = aws_iam_policy.function_logging_policy.arn
+  policy_arn = aws_iam_policy.function_all_policy.arn
 
 }
 
